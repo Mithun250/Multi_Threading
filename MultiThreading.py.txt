@@ -1,0 +1,67 @@
+import threading
+def display():
+  for i in range(1,11):
+    print("Chile thread",i)
+
+x=threading.Thread(target=display)
+x.start()
+
+---------
+x=threading.Thread(target=display)
+x.start()
+for i in range(1,11):
+  print("Main thread",i)
+----------
+
+
+import time
+def display1():
+  for i in range(1,11):
+    time.sleep(1)
+    print("Child thread1:",i)
+def display2():
+  for i in range(1,11):
+    time.sleep(1)
+    print("Child thread2:",i)
+def display3():
+  for i in range(1,11):
+    print("Child thread3:",i)
+    time.sleep(1)
+def display4():
+  for i in range(1,11):
+    time.sleep(1)
+    print("Child thread4:",i)
+def display5():
+  for i in range(1,11):
+    time.sleep(1)
+    print("Child thread5:",i)
+
+start=time.time() #collect the time delay in start(50 sec)
+
+# display1()
+# display2()
+# display3()
+# display4()
+# display5()
+
+#Multi threading
+x1=threading.Thread(target=display1)
+x1.start()
+x2=threading.Thread(target=display2)
+x2.start()
+x3=threading.Thread(target=display3)
+x3.start()
+x4=threading.Thread(target=display4)
+x4.start()
+x5=threading.Thread(target=display5)
+x5.start()
+x1.join()
+x2.join()
+x3.join()
+x4.join()
+
+for i in range(1,11):
+  time.sleep(1)
+  print("Main thread",i)
+end=time.time()#10 sec
+print(end-start) #ex start=10.00 ,end=10.00.6sec = 60sec
